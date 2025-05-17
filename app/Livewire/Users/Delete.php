@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Livewire\Users;
 
 use App\Livewire\Traits\Alert;
@@ -9,10 +11,6 @@ use Livewire\Component;
 
 class Delete extends Component
 {
-    use Alert;
-
-    public User $user;
-
     public function render(): string
     {
         return <<<'HTML'
@@ -39,4 +37,8 @@ class Delete extends Component
 
         $this->success();
     }
+
+    use Alert;
+
+    public User $user;
 }

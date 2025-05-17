@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -18,6 +20,14 @@ use Illuminate\Support\Carbon;
  */
 class User extends Authenticatable
 {
+    protected function casts(): array
+    {
+        return [
+            'email_verified_at' => 'datetime',
+            'password'          => 'hashed',
+        ];
+    }
+
     use HasFactory;
     use Notifiable;
 
@@ -31,12 +41,4 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
-
-    protected function casts(): array
-    {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
-    }
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Livewire\Traits;
 
 use TallStackUi\Foundation\Interactions\Dialog;
@@ -7,8 +9,6 @@ use TallStackUi\Traits\Interactions;
 
 trait Alert
 {
-    use Interactions;
-
     public function success(string $title = 'Done!', string $description = 'Task completed successfully.'): void
     {
         $this->dialog()
@@ -23,14 +23,14 @@ trait Alert
             ->send();
     }
 
-    public function warning(string $title = 'Ooops!', string $description = null): void
+    public function warning(string $title = 'Ooops!', ?string $description = null): void
     {
         $this->dialog()
             ->warning(__($title), __($description))
             ->send();
     }
 
-    public function info(string $title = 'Warning!', string $description = null): void
+    public function info(string $title = 'Warning!', ?string $description = null): void
     {
         $this->dialog()
             ->info(__($title), __($description))
@@ -41,4 +41,6 @@ trait Alert
     {
         return $this->dialog()->question(__($title), __($description));
     }
+
+    use Interactions;
 }

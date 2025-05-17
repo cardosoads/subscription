@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Livewire\User;
 
 use App\Livewire\Traits\Alert;
@@ -12,14 +14,6 @@ use Livewire\Component;
 
 class Profile extends Component
 {
-    use Alert;
-
-    public User $user;
-
-    public ?string $password = null;
-
-    public ?string $password_confirmation = null;
-
     public function mount(): void
     {
         $this->user = Auth::user();
@@ -31,14 +25,14 @@ class Profile extends Component
             'user.name' => [
                 'required',
                 'string',
-                'max:255'
+                'max:255',
             ],
             'password' => [
                 'nullable',
                 'string',
                 'confirmed',
-                Rules\Password::defaults()
-            ]
+                Rules\Password::defaults(),
+            ],
         ];
     }
 
@@ -60,4 +54,12 @@ class Profile extends Component
 
         $this->success();
     }
+
+    use Alert;
+
+    public User $user;
+
+    public ?string $password = null;
+
+    public ?string $password_confirmation = null;
 }

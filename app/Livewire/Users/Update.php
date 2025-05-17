@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Livewire\Users;
 
 use App\Livewire\Traits\Alert;
@@ -11,16 +13,6 @@ use Livewire\Component;
 
 class Update extends Component
 {
-    use Alert;
-
-    public ?User $user;
-
-    public ?string $password = null;
-
-    public ?string $password_confirmation = null;
-
-    public bool $modal = false;
-
     public function render(): View
     {
         return view('livewire.users.update');
@@ -40,7 +32,7 @@ class Update extends Component
             'user.name' => [
                 'required',
                 'string',
-                'max:255'
+                'max:255',
             ],
             'user.email' => [
                 'required',
@@ -53,8 +45,8 @@ class Update extends Component
                 'nullable',
                 'string',
                 'min:8',
-                'confirmed'
-            ]
+                'confirmed',
+            ],
         ];
     }
 
@@ -71,4 +63,14 @@ class Update extends Component
 
         $this->success();
     }
+
+    use Alert;
+
+    public ?User $user;
+
+    public ?string $password = null;
+
+    public ?string $password_confirmation = null;
+
+    public bool $modal = false;
 }

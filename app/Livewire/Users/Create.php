@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Livewire\Users;
 
 use App\Livewire\Traits\Alert;
@@ -10,16 +12,6 @@ use Livewire\Component;
 
 class Create extends Component
 {
-    use Alert;
-
-    public User $user;
-
-    public ?string $password = null;
-
-    public ?string $password_confirmation = null;
-
-    public bool $modal = false;
-
     public function mount(): void
     {
         $this->user = new User();
@@ -36,7 +28,7 @@ class Create extends Component
             'user.name' => [
                 'required',
                 'string',
-                'max:255'
+                'max:255',
             ],
             'user.email' => [
                 'required',
@@ -49,8 +41,8 @@ class Create extends Component
                 'nullable',
                 'string',
                 'min:8',
-                'confirmed'
-            ]
+                'confirmed',
+            ],
         ];
     }
 
@@ -58,7 +50,7 @@ class Create extends Component
     {
         $this->validate();
 
-        $this->user->password = bcrypt($this->password);
+        $this->user->password          = bcrypt($this->password);
         $this->user->email_verified_at = now();
         $this->user->save();
 
@@ -69,4 +61,14 @@ class Create extends Component
 
         $this->success();
     }
+
+    use Alert;
+
+    public User $user;
+
+    public ?string $password = null;
+
+    public ?string $password_confirmation = null;
+
+    public bool $modal = false;
 }
